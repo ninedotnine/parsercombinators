@@ -1,20 +1,22 @@
-import java.util.*;
+/* 
+ * this parser applies the provided parser one or more times
+ * returns null if it can't parse any instances of it
+ */
 import java.text.StringCharacterIterator;
 public class ManyParser implements Parser {
-    Parser p;
+    private Parser p;
+
     public ManyParser(Parser p) {
         this.p = p;
     }
 
     public String parse(StringCharacterIterator input) {
-        String str = p.parse(input);
-        if (str == null) {
+        String first = p.parse(input);
+        if (first == null) {
             return null;
         }
-        String str2 = str;
-        while ((str2 = p.parse(input)) != null) {
-            str = str + str2;
-        }
-        return str;
+        Parser more = new AnyParser(p);
+        String rest = more.parse(input);
+        return first + rest;
     }
 }

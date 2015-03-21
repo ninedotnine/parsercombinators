@@ -1,9 +1,8 @@
 import java.text.StringCharacterIterator;
-import java.util.*;
 public class Main {
-    public static final String input = "public   class Main public static void main";
-    /*
-    public static final String input = "hello Delllllonononon yeh k [308] k";
+//     public static final String input = "public   class Main public static void main";
+    public static final String input = "hello Delllllonononon yeh k [308] k/* comment! !! */    \t\n whoaspace ";
+//     /*
     public static void main(String [] args) {
         System.out.println(input);
         StringCharacterIterator itr8r = new StringCharacterIterator(input);
@@ -60,8 +59,19 @@ public class Main {
 
         String parsed11 = new AlphaNumericParser().parse(itr8r);
         System.out.println(parsed11);
+
+        Parser commentParser = new AndParser(new LitParser("/*"), 
+                                        new SkipToParser(new LitParser("*/")));
+        String parsed12 = commentParser.parse(itr8r);
+        System.out.println(parsed12);
+
+        Parser spacesp = new SkipSpacesParser();
+        String parsed13 = spacesp.parse(itr8r);
+        System.out.println(parsed13);
+
     }
-    */
+//     */
+    /*
     public static void main(String [] args) {
         StringCharacterIterator itr8r = new StringCharacterIterator(input);
         Parser wordp = new ManyParser(new AlphaParser());
@@ -73,6 +83,11 @@ public class Main {
 
         str = wordp.parse(itr8r);
         System.out.println(str);
+        spacep.parse(itr8r);
 
+        Parser mainp = new StringParser("Main");
+        str = mainp.parse(itr8r);
+        System.out.println(str);
     }
+    */
 }
